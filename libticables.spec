@@ -1,8 +1,9 @@
 %define version 3.9.7
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 3
 %define libname %mklibname ticables %{major}
+%define develname %mklibname -d ticables
 
 Summary:	Library to handle the different TI link cables
 Name:		libticables
@@ -64,13 +65,14 @@ It also supports some 'virtual' link cables for connection with emulators:
 - Virtual TI (VTi)
 - (Gtk)TiEmu
 
-%package	-n %{libname}-devel
+%package	-n %{develname}
 Summary:	Development related files for %{name}
 Group:		Development/Other
 Provides:	%{name}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}
+Obsoletes:	%mklibname -d ticables 3
 
-%description	-n %{libname}-devel
+%description	-n %{develname}
 This package contains headers and other necessary files to develop or compile
 applications that use %{name}.
 
@@ -96,14 +98,12 @@ rm -rf ${RPM_BUILD_ROOT}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
-%doc COPYING
 
 %files -n %{libname}
 %defattr(-,root,root)
-%doc COPYING
-%{_libdir}/*.so.*
+%{_libdir}/*.so.%{major}*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog README
 %{_libdir}/*.a
@@ -111,4 +111,3 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
 %{_includedir}/*
-
