@@ -13,6 +13,7 @@ Source0:	http://prdownloads.sourceforge.net/tilp/%{name}-%{version}.tar.bz2
 License:	LGPLv2+
 Group:		Communications
 Url:		http://tilp.sourceforge.net/
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	libusb-devel
 Requires:	%{libname} = %{version}
 
