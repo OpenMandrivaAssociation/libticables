@@ -1,5 +1,5 @@
 %define version 3.9.7
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define major 3
 %define libname %mklibname ticables %{major}
@@ -40,7 +40,7 @@ It also supports some 'virtual' link cables for connection with emulators:
 - (Gtk)TiEmu
 
 %package	-n %{libname}
-Group:		Communications
+Group:		System/Libraries
 Summary:	Library to handle different TI link cables
 Requires:	%{name} = %{version}
 
