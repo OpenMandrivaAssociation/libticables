@@ -1,5 +1,5 @@
 %define version 3.9.7
-%define release %mkrel 3
+%define release %mkrel 5
 
 %define major 3
 %define libname %mklibname ticables %{major}
