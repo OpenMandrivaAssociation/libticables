@@ -70,7 +70,6 @@ Summary:	Development related files for %{name}
 Group:		Development/Other
 Provides:	%{name}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}
-Obsoletes:	%mklibname -d ticables 3
 
 %description	-n %{develname}
 This package contains headers and other necessary files to develop or compile
