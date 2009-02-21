@@ -1,6 +1,4 @@
-%define oname	libticables2
-%define version 1.2.0
-%define release %mkrel 1
+%define oname libticables2
 
 %define epoch 1
 %define major 1
@@ -9,16 +7,16 @@
 
 Summary:	Library to handle the different TI link cables
 Name:		libticables
-Version:	%{version}
-Release:	%{release}
-Source0:	http://prdownloads.sourceforge.net/tilp/%{oname}-%{version}.tar.bz2
+Version:	1.2.0
+Release:	%mkrel 1
+Epoch:		1
 License:	LGPLv2+
 Group:		Communications
 Url:		http://tilp.sourceforge.net/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Source0:	http://prdownloads.sourceforge.net/tilp/%{oname}-%{version}.tar.bz2
 BuildRequires:	libusb-devel
-Requires:	%{libname} = %{version}
-
+BuildRequires:	glib2-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 The TiCables library is a part of the TiLP project and constitutes with
@@ -41,12 +39,11 @@ It also supports some 'virtual' link cables for connection with emulators:
 - Virtual TI (VTi)
 - (Gtk)TiEmu
 
-%package	-n %{libname}
-Group:		System/Libraries
+%package -n %{libname}
 Summary:	Library to handle different TI link cables
-Requires:	%{name} = %{version}
+Group:		System/Libraries
 
-%description	-n %{libname}
+%description -n %{libname}
 The TiCables library is a part of the TiLP project and constitutes with
 the other libraries a complete framework for developping and/or linking
 TI files oriented applications.
@@ -67,13 +64,13 @@ It also supports some 'virtual' link cables for connection with emulators:
 - Virtual TI (VTi)
 - (Gtk)TiEmu
 
-%package	-n %{develname}
+%package -n %{develname}
 Summary:	Development related files for %{name}
 Group:		Development/Other
 Provides:	%{name}-devel = %{version}-%{release}
-Requires:	%{libname} = %{version}
+Requires:	%{libname} = %{version}-%{release}
 
-%description	-n %{develname}
+%description -n %{develname}
 This package contains headers and other necessary files to develop or compile
 applications that use %{name}.
 
@@ -81,14 +78,18 @@ applications that use %{name}.
 %setup -q -n %{oname}-%{version}
 
 %build
-%configure2_5x --enable-static=yes --enable-logging=yes
+%configure2_5x \
+	--enable-logging \
+	--disable-rpath \
+	--enable-threads=pth
+
 %make
 
 %install
-rm -rf ${RPM_BUILD_ROOT}
-%makeinstall_std gnulocaledir=${RPM_BUILD_ROOT}%{_datadir}/locale
+rm -rf %{buildroot}
+%makeinstall_std gnulocaledir=%{buildroot}%{_datadir}/locale
 
-%find_lang %{name}
+%find_lang %{oname}
 
 %if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
@@ -99,22 +100,16 @@ rm -rf ${RPM_BUILD_ROOT}
 %endif
 
 %clean
-rm -rf ${RPM_BUILD_ROOT}
+rm -rf %{buildroot}
 
-%files -f %{name}.lang
-%defattr(-,root,root)
-
-%files -n %{libname}
+%files -n %{libname} -f %{oname}.lang
 %defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
-
 
 %files -n %{develname}
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog README
-%{_libdir}/*.a
 %{_libdir}/*.la
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
 %{_includedir}/*
-%{_datadir}/locale/fr/LC_MESSAGES/libticables2.mo
