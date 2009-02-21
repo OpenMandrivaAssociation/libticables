@@ -1,7 +1,8 @@
-%define version 3.9.7
-%define release %mkrel 5
+%define oname	libticables2
+%define version 1.2.0
+%define release %mkrel 1
 
-%define major 3
+%define major 1
 %define libname %mklibname ticables %{major}
 %define develname %mklibname -d ticables
 
@@ -9,7 +10,7 @@ Summary:	Library to handle the different TI link cables
 Name:		libticables
 Version:	%{version}
 Release:	%{release}
-Source0:	http://prdownloads.sourceforge.net/tilp/%{name}-%{version}.tar.bz2
+Source0:	http://prdownloads.sourceforge.net/tilp/%{oname}-%{version}.tar.bz2
 License:	LGPLv2+
 Group:		Communications
 Url:		http://tilp.sourceforge.net/
@@ -76,7 +77,7 @@ This package contains headers and other necessary files to develop or compile
 applications that use %{name}.
 
 %prep
-%setup -q
+%setup -q -n %{oname}-%{version}
 
 %build
 %configure2_5x --enable-static=yes --enable-logging=yes
@@ -106,6 +107,7 @@ rm -rf ${RPM_BUILD_ROOT}
 %defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
 
+
 %files -n %{develname}
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog README
@@ -114,3 +116,4 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
 %{_includedir}/*
+%{_datadir}/locale/fr/LC_MESSAGES/libticables2.mo
