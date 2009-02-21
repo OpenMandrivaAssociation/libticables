@@ -2,7 +2,7 @@
 %define version 1.2.0
 %define release %mkrel 1
 
-%define epoch 2
+%define epoch 1
 %define major 1
 %define libname %mklibname ticables %{major}
 %define develname %mklibname -d ticables
