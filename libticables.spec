@@ -1,6 +1,5 @@
 %define oname libticables2
 
-%define epoch 1
 %define major 1
 %define libname %mklibname ticables %{major}
 %define develname %mklibname -d ticables
@@ -8,7 +7,7 @@
 Summary:	Library to handle the different TI link cables
 Name:		libticables
 Version:	1.2.0
-Release:	%mkrel 1
+Release:	%mkrel 2
 Epoch:		1
 License:	LGPLv2+
 Group:		Communications
@@ -102,11 +101,11 @@ rm -rf %{buildroot}
 %clean
 rm -rf %{buildroot}
 
-%files -n %{libname} -f %{oname}.lang
+%files -n %{libname}
 %defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
 
-%files -n %{develname}
+%files -n %{develname} -f %{oname}.lang
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog README
 %{_libdir}/*.la
