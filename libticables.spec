@@ -7,7 +7,7 @@
 Summary:	Library to handle the different TI link cables
 Name:		libticables
 Version:	1.2.0
-Release:	%mkrel 5
+Release:	%mkrel 6
 Epoch:		1
 License:	LGPLv2+
 Group:		Communications
@@ -41,6 +41,7 @@ It also supports some 'virtual' link cables for connection with emulators:
 %package -n %{libname}
 Summary:	Library to handle different TI link cables
 Group:		System/Libraries
+Provides:   %{name} = %epoch:%version-%release
 
 %description -n %{libname}
 The TiCables library is a part of the TiLP project and constitutes with
