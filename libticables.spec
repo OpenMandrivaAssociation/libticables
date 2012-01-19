@@ -1,6 +1,6 @@
 %define oname libticables2
 
-%define major 3
+%define major 5
 %define libname %mklibname ticables %{major}
 %define develname %mklibname -d ticables
 
@@ -111,7 +111,7 @@ rm -rf %{buildroot}
 %files -n %{develname} -f %{oname}.lang
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog README
-%{_libdir}/*.la
+# %{_libdir}/*.la
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
 %{_includedir}/*
