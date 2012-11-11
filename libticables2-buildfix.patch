@@ -1,0 +1,65 @@
+--- src/linux/link_usb.c.ori	2010-07-05 19:00:39.000000000 +0200
++++ src/linux/link_usb.c	2010-07-06 15:51:56.000000000 +0200
+@@ -170,34 +170,6 @@
+ #define IOCTL_USB_DISCONNECT	_IO('U', 22)
+ #define IOCTL_USB_CONNECT	_IO('U', 23)
+ 
+-/* definitions to set the libusb error string from the libusb error.h */
+-typedef enum {
+-  USB_ERROR_TYPE_NONE = 0,
+-  USB_ERROR_TYPE_STRING,
+-  USB_ERROR_TYPE_ERRNO,
+-} usb_error_type_t;
+-
+-extern char usb_error_str[1024];
+-extern int usb_error_errno;
+-extern usb_error_type_t usb_error_type;
+-extern int usb_debug;
+-
+-#define USB_ERROR(x) \
+-	do { \
+-          usb_error_type = USB_ERROR_TYPE_ERRNO; \
+-          usb_error_errno = x; \
+-	  return x; \
+-	} while (0)
+-
+-#define USB_ERROR_STR(x, format, args...) \
+-	do { \
+-	  usb_error_type = USB_ERROR_TYPE_STRING; \
+-	  snprintf(usb_error_str, sizeof(usb_error_str) - 1, format, ## args); \
+-          if (usb_debug >= 2) \
+-            fprintf(stderr, "USB error: %s\n", usb_error_str); \
+-	  return x; \
+-	} while (0)
+-
+ /* variables for slv_check and slv_bulk_read2 */
+ static int io_pending = 0;
+ static struct usb_urb urb;
+@@ -617,8 +589,7 @@
+ 
+ 			ret = ioctl(dev->fd, IOCTL_USB_SUBMITURB, &urb);
+ 			if (ret < 0) {
+-				USB_ERROR_STR(-errno, "error submitting URB: %s", strerror(errno));
+-				return ret;
++				return -errno;
+ 			}
+ 		}
+ 
+@@ -645,7 +616,7 @@
+ 		 * error now
+ 		 */
+ 		if (ret < 0 && errno != EAGAIN)
+-			USB_ERROR_STR(-errno, "error reaping URB: %s", strerror(errno));
++			return -errno;
+ 
+ 		bytesdone += urb.actual_length;
+ 	} while (ret == 0 && bytesdone < size && urb.actual_length == requested);
+@@ -660,8 +631,6 @@
+ 			rc = urb.status;
+ 
+ 		ret = ioctl(dev->fd, IOCTL_USB_DISCARDURB, &urb);
+-		if (ret < 0 && errno != EINVAL && usb_debug >= 1)
+-			fprintf(stderr, "error discarding URB: %s", strerror(errno));
+ 
+ 		/*
+ 		 * When the URB is unlinked, it gets moved to the completed list and
