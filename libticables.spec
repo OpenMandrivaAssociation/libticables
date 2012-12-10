@@ -117,7 +117,23 @@ rm -rf %{buildroot}
 %{_includedir}/*
 
 
+
+
 %changelog
+* Thu Jan 19 2012 Zombie Ryushu <ryushu@mandriva.org> 1:1.3.3-1mdv2012.0
++ Revision: 762263
+- Fix Major
+- Upgrade to 1.3.3
+
+* Tue Jul 13 2010 Zombie Ryushu <ryushu@mandriva.org> 1:1.3.1-1mdv2011.0
++ Revision: 551831
+- Upgrade to 1.3.1
+- Upgrade to 1.3.1
+- Upgrade to 1.3.0
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
 * Wed Mar 18 2009 Olivier Thauvin <nanardon@mandriva.org> 1:1.2.0-6mdv2009.1
 + Revision: 357079
 - resurrect provides libticables
@@ -148,7 +164,7 @@ rm -rf %{buildroot}
 + Revision: 337902
 - Fix Unrevisioned Obsoletes
 
-* Sun Jul 27 2008 Thierry Vignaud <tvignaud@mandriva.com> 3.9.7-5mdv2009.0
+* Sun Jul 27 2008 Thierry Vignaud <tv@mandriva.org> 3.9.7-5mdv2009.0
 + Revision: 250599
 - rebuild
 
@@ -159,18 +175,18 @@ rm -rf %{buildroot}
 + Revision: 189881
 - Fix lib group
 
-  + Olivier Blin <oblin@mandriva.com>
+  + Olivier Blin <blino@mandriva.org>
     - restore BuildRoot
 
-  + Thierry Vignaud <tvignaud@mandriva.com>
+  + Thierry Vignaud <tv@mandriva.org>
     - kill re-definition of %%buildroot on Pixel's request
 
-* Mon Dec 10 2007 Funda Wang <fundawang@mandriva.org> 3.9.7-2mdv2008.1
+* Mon Dec 10 2007 Funda Wang <fwang@mandriva.org> 3.9.7-2mdv2008.1
 + Revision: 116813
 - New license policy
 - New devel package policy
 
-  + Thierry Vignaud <tvignaud@mandriva.com>
+  + Thierry Vignaud <tv@mandriva.org>
     - kill changelog left by repsys
 
 
