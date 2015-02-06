@@ -7,7 +7,7 @@
 Summary:	Library to handle the different TI link cables
 Name:		libticables
 Version:	1.3.3
-Release:	%mkrel 1
+Release:	2
 Epoch:		1
 License:	LGPLv2+
 Group:		Communications
