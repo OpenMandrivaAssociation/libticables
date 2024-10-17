@@ -11,7 +11,7 @@ Release:	2
 Epoch:		1
 License:	LGPLv2+
 Group:		Communications
-Url:		http://tilp.sourceforge.net/
+Url:		https://tilp.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/tilp/%{oname}-%{version}.tar.bz2
 Patch0:		libticables2-buildfix.patch
 BuildRequires:	libusb-devel
