@@ -14,6 +14,11 @@ Group:		Communications
 Url:		https://tilp.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/tilp/%{oname}-%{version}.tar.bz2
 Patch0:		libticables2-buildfix.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	libusb-devel
 BuildRequires:	glib2-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
